@@ -1,10 +1,8 @@
-import { url } from 'inspector';
-
 var mongoose = require('mongoose');
 
 var feedSchema = mongoose.Schema({
     text:{
-        type: string,
+        type: String,
         required: true
     },
     create_date:{
