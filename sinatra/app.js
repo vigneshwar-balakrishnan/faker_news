@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var path = require('path');
 
 var index = require('./routes/index');
-var index = require('./routes/user');
+
 
 var port = 3000;
 
