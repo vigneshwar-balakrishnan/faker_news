@@ -12,9 +12,9 @@ var feedSchema = mongoose.Schema({
     }
 });
 
-var feed = module.exports=mongoose.model('feed',feedSchema);
+var Feed = module.exports.Feed=mongoose.model('Feed',feedSchema);
 
 //get feed
-module.exports.getFeed = function(callback){
-    feed.find(callback)
-}
+/*module.exports.getFeed = function(callback,limit){
+    feed.find(callback).limit(limit);
+}*/

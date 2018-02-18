@@ -3,22 +3,31 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var mongoose = require('mongoose');
 var index = require('./routes/index');
-feed = require('./model/feed')
+var feedlist = require('./routes/feedlist');
+var feed = require('./model/feed')
 
 var port = 3000;
 
 //Connect mongoose
-mongoose.connect('mongodb://localhost/feed');
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/feedstore');
 var db = mongoose.connection;
 
+db.once('open', function(){
+    console.log('Connected to the db');
+})
+db.on('error',function(){
+    console.log(err);
+})
 
 
-/*app.get('/feed',function(req,res){
- feed.getFeed(function(err,feed){
+/*app.get('/feedlist',function(req,res){
+ feed.getFeed(function(err,data){
      if(err){
          throw err;
         }
-        res.send(feed);
+        res.send(data);
+        console.log(feed)
  })
 })*/
 
