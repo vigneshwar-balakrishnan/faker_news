@@ -7,22 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-       <h1>Feeds</h1> 
+       <h1>Comments</h1> 
         
-        <ol>
-            <% Feed.forEach(function(data){ %>
+       <form className="commentForm" action="/feedlist" method="post">
                 
-                <li><%=data.title %> </li>
-                <%=data.create_date%>
-                <form className="commentForm" action="/feedlist" method="post">
-                
-                    <input type="text" placeholder="Say something..." name="text" /><br>
-                    <input type="submit" value="Comment" />
-                  </form>
-                   
-            <% }) %>
-
-        </ol>        
-
+        <input type="text" placeholder="Say something..." name="text" />
+        <input type="submit" value="Comment" />
+      </form>
 </body>
 </html>

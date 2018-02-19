@@ -1,10 +1,11 @@
 var mongoose = require('mongoose');
 
 var commentSchema = mongoose.Schema({
-    text:{
+    comment:{
         type: String,
         required: true
     },
+    
     // create_date:{
     //     type: Date,
     //     default : Date.now

@@ -4,6 +4,7 @@ var path = require('path');
 var mongoose = require('mongoose');
 var hacker = require('./routes/hacker');
 var Feed = require('./model/feed')
+var Comment = require('./model/comment')
 var app = express();
 var port = 3000;
 

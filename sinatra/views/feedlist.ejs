@@ -13,7 +13,8 @@
             <% Feed.forEach(function(data){ %>
                 
                 <li><%=data.text %> </li>
-                <a href="comments">comment</a><br>
+
+                <a href="comments/<%=data._id%>">comment</a><br>
                 <%=data.create_date%>
                 <!-- <form className="commentForm" action="/feedlist" method="post">
                 

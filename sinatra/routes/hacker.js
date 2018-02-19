@@ -10,7 +10,7 @@ router.get('/feedlist',function(req ,res ,next){
     res.render('feedlist.ejs');
 });
 
-router.get('/comments',function(req ,res ,next){
+router.get('/comments/:id',function(req ,res ,next){
     res.render('comments.ejs');
 });
 
