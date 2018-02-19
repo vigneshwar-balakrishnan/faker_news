@@ -2,10 +2,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var mongoose = require('mongoose');
-var index = require('./routes/index');
-var feedlist = require('./routes/feedlist');
-var feed = require('./model/feed')
-
+var hacker = require('./routes/hacker');
+var Feed = require('./model/feed')
+var app = express();
 var port = 3000;
 
 //Connect mongoose
@@ -21,20 +20,14 @@ db.on('error',function(){
 })
 
 
-/*app.get('/feedlist',function(req,res){
- feed.getFeed(function(err,data){
-     if(err){
-         throw err;
-        }
-        res.send(data);
-        console.log(feed)
- })
-})*/
+app.get('/feedlist', function(req, res){
+	Feed.find({}, function(err, docs){
+		if(err) res.json(err);
+		else    res.render('feedlist', {Feed: docs});
+	});
+});
 
 
-
-
-var app = express();
 
 //View Engine
 app.set('views', path.join(__dirname, 'views'));
@@ -46,10 +39,35 @@ app.use(express.static(path.join(__dirname,'client')));
 
 //Body Parser middleWare
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
-app.use('/', index);
+app.use('/', hacker);
+
+//feedlist route
+app.use('/feedlist', hacker);
+
+//comments route
+app.use('/comments', hacker);
+
+//post to the db -----add to the feedlist later
+app.post('/', function(req,res){
+    let feeds = new Feed();
+    feeds.text= req.body.text;
+    feeds.create_date = req.body.create_date;
+    
+
+    feeds.save(function(err){
+        if(err){
+            console.log(err);
+            return;
+        } else{
+            res.redirect('/feedlist');
+        }
+    });
+});
+
+
 
 app.listen(port, function(){
     console.log('server running on port  ' + port );
